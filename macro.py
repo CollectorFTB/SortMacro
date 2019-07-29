@@ -9,9 +9,10 @@ from util import bring_up_window
 mouse = Controller()
 
 def click(mb=Button.left):
+    sleep(0.3)
     mouse.click(mb)
     mouse.release(mb)
-    sleep(0.5)
+    sleep(0.3)
 
 def check_item(parse_mode):
     clipboard.OpenClipboard()

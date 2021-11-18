@@ -1,40 +1,26 @@
-from macro import check_item, click, move_mouse_quad, move_mouse_inv, mouse, keyboard
+"""
+Responsible for interacting with the prophecy window to seek and seal prophecies
+"""
 import time
-# 332, 777 seek prophecy
-# 511, 450 seal prophecy
-# 567, 418 stash
-# 232, 143 dump2
 
-def fill_inventory():
-    for i in range(5):
-        for j in range(12):
-            mouse.position = (511, 450)
-            click()
-            keyboard.press_and_release('enter')
-            move_mouse_inv(i, j)
-            click()
-            mouse.position = (332, 777)
-            click()
+import inventory 
+import keyboard_controls as kb
+import mouse_controls as mouse
+
+SEAL = (511, 450)
+SEEK = (332, 777)
+
+def seek_inventory():
+    for inventory_position in inventory.Inventory():
+        mouse.click(SEAL)
+        kb.press_and_release('enter')
+        mouse.click(inventory_position)
+        mouse.click(SEEK)
 
 def dump_inventory():
-    keyboard.press_and_release('esc')
-    mouse.position = (898, 429)
-    click()
-    mouse.position = (232, 143)
-    click()
-    keyboard.press('ctrl')
-    for i in range(5):
-        for j in range(12):
-            move_mouse_inv(i, j)
-            click()
-
-    keyboard.release('ctrl')
-
-    mouse.position = (1078, 391)
-    click()
-    mouse.position = (614, 267)
-    click()
-
-    keyboard.press_and_release('i')
+    with kb.hold('ctrl'):
+        for inventory_position in inventory.Inventory():
+            # TODO: Check if need to destory?
+            mouse.click(inventory_position)
 
 

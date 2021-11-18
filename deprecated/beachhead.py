@@ -28,3 +28,9 @@ def update_spreadsheet(inventory, spreadsheet_name):
                 index = row.index(item) + 2 # weird ass google spreadsheets indexing
                 value = int(spreadsheet.cell(i, index).value) # grab old value at that index
                 spreadsheet.update_cell(i, index, inventory[item] + value) # update that cell
+
+
+# def throw_inventory_on_spreadsheet():
+#     inventory = beachhead.scan()
+#     if inventory:
+#         beachhead.update_spreadsheet(inventory, 'Beachhead-M')

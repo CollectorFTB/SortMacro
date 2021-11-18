@@ -1,36 +1,14 @@
-from time import sleep
+import time
 
-import keyboard
-from pynput.mouse import Button, Controller
+from clipboard import *
 
-import win32clipboard as clipboard
-from util import bring_up_window
-
-mouse = Controller()
-
-def click(mb=Button.left):
-    sleep(0.3)
-    mouse.click(mb)
-    mouse.release(mb)
-    sleep(0.3)
+import controls.keyboard_controls as kb
 
 def check_item(parse_mode):
-    clipboard.OpenClipboard()
-    clipboard.EmptyClipboard()
-    clipboard.CloseClipboard()  
-
-    keyboard.press('ctrl')
-    keyboard.press('c')
-    keyboard.release('ctrl')
-    keyboard.release('c')
-    sleep(0.2)
+    kb.combo('ctrl', 'c')
     
-    clipboard.OpenClipboard()
-    try:
-        raw_data = clipboard.GetClipboardData()
-    except:
-        return None, None
-    clipboard.CloseClipboard()
+    if not (raw_data := get_clipboard_data()):
+        return None, None  
 
     raw_data = raw_data.split('\r\n')
     stack_size = 1
@@ -89,22 +67,3 @@ def check_item(parse_mode):
             stack_size = 1
 
     return re, stack_size
-
-
-
-        
-def move_mouse_quad(row, col): # stash tab row,col translated to mouse x,y
-    step = 26.66
-    start = (24, 172)
-    mouse.position = (start[0] + int(col * step), start[1] + int(row * step))
-    sleep(0.1)
-
-def move_mouse_inv(row, col):
-    step = 26.66*2
-    start = (1295, 615)
-    mouse.position = (start[0] + int(col * step), start[1] + int(row * step))
-    sleep(0.1)
-
-
-def mouse_coords():
-    print(mouse.position)

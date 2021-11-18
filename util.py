@@ -1,6 +1,9 @@
+"""
+Voodoo win32gui magic here, wrote this code 3 years ago, no idea what goes on here
+"""
 import string
-
 import win32gui
+from controls.util import delay 
 
 
 def contains_only_letters_from_collection(word, collection):
@@ -9,6 +12,7 @@ def contains_only_letters_from_collection(word, collection):
 
 def filter_ascii_windows(windows):
     return [window for window in windows if not contains_only_letters_from_collection(window, string.ascii_letters)]
+
 
 def get_all_windows():
     def callback(hwnd, strings):
@@ -24,6 +28,8 @@ def get_all_windows():
     windows = filter_ascii_windows(windows) # filter ascii only windows
     return windows
 
+
+@delay(time=0.3)
 def bring_up_window(window_title):
     # search window
     window = win32gui.FindWindow(None, window_title)

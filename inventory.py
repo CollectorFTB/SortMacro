@@ -3,10 +3,10 @@ The Inventory, StashTab, QuadTab classes let you iterate over stash positions on
 """
 from dataclasses import dataclass
 
-# Voodoo 1920x1080 numbers
-ITEM_WIDTH = 26.66
-STASH_START = (24, 172)
-INVENTORY_START = (1295, 615)
+# Voodoo 2560x1440 numbers
+ITEM_WIDTH = 36 * 2
+STASH_START = (56, 214)
+INVENTORY_START = (1725, 820)
 
 @dataclass
 class Storage:   

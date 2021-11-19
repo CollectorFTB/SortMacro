@@ -29,7 +29,7 @@ def get_all_windows():
     return windows
 
 
-@delay(time=0.3)
+@delay(0.3)
 def bring_up_window(window_title):
     # search window
     window = win32gui.FindWindow(None, window_title)

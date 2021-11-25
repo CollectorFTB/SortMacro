@@ -23,7 +23,7 @@ def combo(*keys):
     for key in keys:
         keyboard.press(key)
 
-    time.sleep(0.3)
+    time.sleep(0.1)
 
     for key in keys[::-1]:
         keyboard.release(key)
